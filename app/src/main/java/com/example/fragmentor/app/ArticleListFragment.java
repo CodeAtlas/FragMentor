@@ -1,14 +1,23 @@
 package com.example.fragmentor.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.fragmentor.app.controller.ArticleListLoader;
+import com.example.fragmentor.app.controller.viewcontroller.ArticleListAdapter;
+import com.example.fragmentor.app.model.Article;
+import com.example.fragmentor.app.service.RssDownloadService;
 
-import com.example.fragmentor.app.dummy.DummyContent;
+import java.util.List;
 
 /**
  * A list fragment representing a list of Feed. This fragment
@@ -19,7 +28,15 @@ import com.example.fragmentor.app.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ArticleListFragment extends ListFragment {
+public class ArticleListFragment
+        extends ListFragment
+        implements LoaderManager.LoaderCallbacks<List<Article>>
+{
+
+    private ArticleListAdapter articleAdapter;
+
+    /*  Id Loader */
+    private static final int LOADER_ARTICLES_ID = 58845;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -71,12 +88,33 @@ public class ArticleListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
+        // Avviso che contribuisco a riempire le Action della ActionBar
+        setHasOptionsMenu(true);
+
+        articleAdapter = new ArticleListAdapter(getActivity());
+        setListAdapter(articleAdapter);
+
+        // The call to forceLoad() is not necessary BUT it's useful to avoid a tricky bug of
+        // AsyncTaskLoader (compat library) that doesn't call loadInBackgroud() when started
+        getLoaderManager().initLoader(LOADER_ARTICLES_ID, null, this).forceLoad();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.refresh, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                Intent i = new Intent(getActivity(), RssDownloadService.class);
+                getActivity().startService(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -89,6 +127,7 @@ public class ArticleListFragment extends ListFragment {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
     }
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -116,7 +155,7 @@ public class ArticleListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected(((Article) articleAdapter.getItem(position)).id);
     }
 
     @Override
@@ -148,5 +187,37 @@ public class ArticleListFragment extends ListFragment {
         }
 
         mActivatedPosition = position;
+    }
+
+    @Override
+    public Loader<List<Article>> onCreateLoader(int id, Bundle args) {
+        switch (id) {
+            case LOADER_ARTICLES_ID:
+                // TODO implementare scelta categoria
+                return new ArticleListLoader(getActivity(), 0);
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Article>> loader, List<Article> data) {
+        switch (loader.getId()) {
+            case LOADER_ARTICLES_ID:
+                articleAdapter.clear();
+                articleAdapter.addAll(data);
+                break;
+        }
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Article>> loader) {
+        switch (loader.getId()) {
+            case LOADER_ARTICLES_ID:
+                articleAdapter.clear();
+                break;
+        }
+
     }
 }

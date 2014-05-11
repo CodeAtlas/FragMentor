@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fragmentor.app" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -24,6 +26,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.fragmentor.app.ArticleListActivity" />
         </activity>
+
+        <service
+            android:name="com.example.fragmentor.app.service.RssDownloadService"
+            android:icon="@drawable/ic_launcher"
+            android:label="Rss download service" >
+        </service>
+
     </application>
 
 </manifest>

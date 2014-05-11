@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- L'ordine è importante, se lo cambi assicurati di svuotare il DB SQLite -->
+    <string-array name="agiNewsFeeds" translatable="false">
+        <item>http://www.agi.it/cronaca/rss</item>
+        <item>http://www.agi.it/economia/rss</item>
+        <item>http://www.agi.it/politica/rss</item>
+        <item>http://www.agi.it/estero/rss</item>
+        <item>http://www.agi.it/spettacolo/rss</item>
+        <item>http://www.agi.it/sport/rss</item>
+        <item>http://www.agi.it/salute/rss</item>
+        <item>http://www.agi.it/research-e-sviluppo/rss</item>
+        <item>http://www.agi.it/tech/rss</item>
+        <item>http://www.agi.it/cinema/rss</item>
+        <item>http://www.agi.it/gossip/rss</item>
+        <item>http://www.agi.it/animali/rss</item>
+    </string-array>
+</resources>
