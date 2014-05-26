@@ -11,7 +11,7 @@ import android.view.MenuItem;
  * An activity representing a single Article detail screen. This
  * activity is only used on handset devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link ArticleListActivity}.
+ * in a {@link ArticleMainActivity}.
  * <p>
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link ArticleDetailFragment}.
@@ -60,7 +60,7 @@ public class ArticleDetailActivity extends ActionBarActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            NavUtils.navigateUpTo(this, new Intent(this, ArticleListActivity.class));
+            NavUtils.navigateUpTo(this, new Intent(this, ArticleMainActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

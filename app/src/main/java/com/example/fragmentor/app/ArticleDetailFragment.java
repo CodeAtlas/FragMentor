@@ -4,19 +4,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.TextView;
 
 import com.example.fragmentor.app.controller.ArticleLoader;
 import com.example.fragmentor.app.model.Article;
 
 /**
  * A fragment representing a single Article detail screen.
- * This fragment is either contained in a {@link ArticleListActivity}
+ * This fragment is either contained in a {@link ArticleMainActivity}
  * in two-pane mode (on tablets) or a {@link ArticleDetailActivity}
  * on handsets.
  */

@@ -8,7 +8,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="com.example.fragmentor.app.ArticleListActivity">
+    tools:context="com.example.fragmentor.app.ArticleMainActivity">
 
     <!--
     This layout is a two-pane layout for the Feed

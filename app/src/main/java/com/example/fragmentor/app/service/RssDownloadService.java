@@ -32,7 +32,7 @@ public class RssDownloadService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String[] agiNewsFeeds = getResources().getStringArray(R.array.agiNewsFeeds);
+        String[] agiNewsFeeds = getResources().getStringArray(R.array.agiNewsFeedsUrls);
 
         HttpClient httpclient = new DefaultHttpClient();
         AgiRssParser parser = new AgiRssParser();

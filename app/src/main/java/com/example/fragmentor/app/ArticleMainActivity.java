@@ -2,9 +2,8 @@ package com.example.fragmentor.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-
-
 
 
 /**
@@ -23,8 +22,9 @@ import android.support.v4.app.FragmentActivity;
  * {@link ArticleListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class ArticleListActivity extends FragmentActivity
-        implements ArticleListFragment.Callbacks {
+public class ArticleMainActivity
+        extends FragmentActivity
+        implements ArticleListFragment.Callbacks, ArticleCategoriesFragment.Callbacks {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -35,7 +35,7 @@ public class ArticleListActivity extends FragmentActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_article_list);
+        setContentView(R.layout.activity_article_main);
 
         if (findViewById(R.id.article_detail_container) != null) {
             // The detail container view will be present only in the
@@ -52,6 +52,16 @@ public class ArticleListActivity extends FragmentActivity
         }
 
         // TODO: If exposing deep links into your app, handle intents here.
+    }
+
+    @Override
+    public void onCategorySelected(int categoryIndex) {
+        // Categories fragment tells me the user has made a choice.
+        // Notify List fragment about it!
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.article_list);
+        if (f != null && f instanceof ArticleCategoriesFragment.Callbacks) {
+            ((ArticleCategoriesFragment.Callbacks) f).onCategorySelected(categoryIndex);
+        }
     }
 
     /**
@@ -80,4 +90,5 @@ public class ArticleListActivity extends FragmentActivity
             startActivity(detailIntent);
         }
     }
+
 }

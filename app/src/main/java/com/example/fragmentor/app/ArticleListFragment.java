@@ -30,10 +30,11 @@ import java.util.List;
  */
 public class ArticleListFragment
         extends ListFragment
-        implements LoaderManager.LoaderCallbacks<List<Article>>
+        implements LoaderManager.LoaderCallbacks<List<Article>>, ArticleCategoriesFragment.Callbacks
 {
 
     private ArticleListAdapter articleAdapter;
+    private int currentCategory = 0;
 
     /*  Id Loader */
     private static final int LOADER_ARTICLES_ID = 58845;
@@ -190,11 +191,17 @@ public class ArticleListFragment
     }
 
     @Override
+    public void onCategorySelected(int categoryIndex) {
+        getLoaderManager().destroyLoader(LOADER_ARTICLES_ID);
+        currentCategory = categoryIndex;
+        getLoaderManager().initLoader(LOADER_ARTICLES_ID, null, this).forceLoad();
+    }
+
+    @Override
     public Loader<List<Article>> onCreateLoader(int id, Bundle args) {
         switch (id) {
             case LOADER_ARTICLES_ID:
-                // TODO implementare scelta categoria
-                return new ArticleListLoader(getActivity(), 0);
+                return new ArticleListLoader(getActivity(), currentCategory);
             default:
                 return null;
         }
@@ -208,7 +215,6 @@ public class ArticleListFragment
                 articleAdapter.addAll(data);
                 break;
         }
-
     }
 
     @Override
@@ -218,6 +224,6 @@ public class ArticleListFragment
                 articleAdapter.clear();
                 break;
         }
-
     }
+
 }
