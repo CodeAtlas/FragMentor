@@ -27,5 +27,4 @@
         tools:context="com.example.fragmentor.app.ArticleMainActivity"
         tools:layout="@android:layout/list_content" />
 
-
 </RelativeLayout>
