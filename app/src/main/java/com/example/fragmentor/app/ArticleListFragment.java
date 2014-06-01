@@ -65,7 +65,7 @@ public class ArticleListFragment
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(String id);
+        public void onArticleSelected(String id);
     }
 
     /**
@@ -74,7 +74,7 @@ public class ArticleListFragment
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(String id) {
+        public void onArticleSelected(String id) {
         }
     };
 
@@ -156,7 +156,7 @@ public class ArticleListFragment
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(((Article) articleAdapter.getItem(position)).id);
+        mCallbacks.onArticleSelected(((Article) articleAdapter.getItem(position)).id);
     }
 
     @Override

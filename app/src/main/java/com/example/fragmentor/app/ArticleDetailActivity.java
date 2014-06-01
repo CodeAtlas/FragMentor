@@ -2,8 +2,8 @@ package com.example.fragmentor.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 
@@ -38,14 +38,17 @@ public class ArticleDetailActivity extends ActionBarActivity {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putString(ArticleDetailFragment.ARG_ARTICLE_ID,
-                    getIntent().getStringExtra(ArticleDetailFragment.ARG_ARTICLE_ID));
-            ArticleDetailFragment fragment = new ArticleDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.article_detail_container, fragment)
-                    .commit();
+            Bundle extras = getIntent().getExtras();
+            if (extras != null && extras.containsKey(ArticleDetailFragment.ARG_ARTICLE_ID)) {
+                Bundle arguments = new Bundle();
+                arguments.putString(ArticleDetailFragment.ARG_ARTICLE_ID,
+                        extras.getString(ArticleDetailFragment.ARG_ARTICLE_ID));
+                ArticleDetailFragment fragment = new ArticleDetailFragment();
+                fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.article_detail_container, fragment)
+                        .commit();
+            }
         }
     }
 

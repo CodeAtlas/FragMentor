@@ -75,7 +75,7 @@ public class ArticleDetailFragment
     }
 
     @Override
-    public void onItemSelected(String id) {
+    public void onArticleSelected(String id) {
         if (articleId != null && !articleId.equals(id)) {
             // A new article display request arrived!
             articleId = id;

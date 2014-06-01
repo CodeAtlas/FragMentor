@@ -43,11 +43,16 @@ public class ArticleMainActivity
             // res/values-sw600dp). If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
+        }
 
-            // Add the detail fragment
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.article_detail_container, new ArticleDetailFragment())
-                    .commit();
+        if (mTwoPane) {
+            if (savedInstanceState == null) {
+                // At first run, add the detail fragment. When there's a saved state
+                // previous Fragments are added back automatically.
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.article_detail_container, new ArticleDetailFragment())
+                        .commit();
+            }
 
             // In two-pane mode, list items should be given the 'activated' state when touched.
             ((ArticleListFragment) getSupportFragmentManager()
@@ -71,7 +76,7 @@ public class ArticleMainActivity
      * indicating that the item with the given ID was selected.
      */
     @Override
-    public void onItemSelected(String id) {
+    public void onArticleSelected(String id) {
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
@@ -79,7 +84,7 @@ public class ArticleMainActivity
             Fragment f = getSupportFragmentManager().findFragmentById(R.id.article_detail_container);
 
             if (f != null && f instanceof ArticleDetailFragment) {
-                ((ArticleDetailFragment) f).onItemSelected(id);
+                ((ArticleDetailFragment) f).onArticleSelected(id);
             }
 
         } else {
