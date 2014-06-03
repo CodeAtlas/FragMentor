@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- The following value should be replaced with correct property id -->
+    <string name="ga_trackingId">UA-XXXXXXX-Y</string>
+
+    <!-- Enable automatic exception tracking -->
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+
+    <!-- Set the amount of time (in seconds) your application can stay in the background before the session is ended -->
+    <integer name="ga_sessionTimeout">300</integer>
+
+</resources>
