@@ -76,21 +76,19 @@ public class ArticleDetailFragment
 
     @Override
     public void onArticleSelected(String id) {
-        if (articleId != null && !articleId.equals(id)) {
+        if (id != null && !id.equals(articleId)) {
             // A new article display request arrived!
             articleId = id;
 
-            if (articleId != null) {
-                // Create a new loader with new article parameter
-                getLoaderManager().destroyLoader(LOADER_ARTICLE_ID);
-                getLoaderManager().initLoader(LOADER_ARTICLE_ID, null, this).forceLoad();
-            }
+            // Create a new loader with new article parameter
+            getLoaderManager().destroyLoader(LOADER_ARTICLE_ID);
+            getLoaderManager().initLoader(LOADER_ARTICLE_ID, null, this).forceLoad();
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
         if (rootView == null) {
             return null;
