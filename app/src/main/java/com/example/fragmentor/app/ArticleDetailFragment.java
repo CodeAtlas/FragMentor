@@ -11,6 +11,7 @@ import android.webkit.WebView;
 
 import com.example.fragmentor.app.controller.ArticleLoader;
 import com.example.fragmentor.app.model.Article;
+import com.example.fragmentor.app.util.TrackingAnalyticsUtils;
 
 /**
  * A fragment representing a single Article detail screen.
@@ -22,11 +23,12 @@ public class ArticleDetailFragment
         extends Fragment
         implements ArticleListFragment.Callbacks, LoaderManager.LoaderCallbacks<Article>
 {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
+
+    /* The fragment argument representing the item ID that this fragment represents. */
     public static final String ARG_ARTICLE_ID = "item_id";
+
+    /* Costant key */
+    private static final String KEY_DISPLAY_TIMING = "d_tm";
 
     /* ID of the article to be fetched from DB */
     private String articleId;
@@ -36,6 +38,9 @@ public class ArticleDetailFragment
 
     /* The article content will be displayed here */
     private WebView detailWebView;
+
+    /* User article display timing */
+    private Long displayTiming;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -52,6 +57,9 @@ public class ArticleDetailFragment
             // previous state found, restore values
             if (savedInstanceState.containsKey(ARG_ARTICLE_ID)) {
                 articleId = savedInstanceState.getString(ARG_ARTICLE_ID);
+            }
+            if (savedInstanceState.containsKey(KEY_DISPLAY_TIMING)) {
+                displayTiming = savedInstanceState.getLong(KEY_DISPLAY_TIMING);
             }
         } else {
             // first run, check if who called also passed interesting arguments
@@ -71,6 +79,7 @@ public class ArticleDetailFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putString(ARG_ARTICLE_ID, articleId);
+        outState.putLong(KEY_DISPLAY_TIMING, displayTiming);
         super.onSaveInstanceState(outState);
     }
 
@@ -78,7 +87,23 @@ public class ArticleDetailFragment
     public void onArticleSelected(String id) {
         if (id != null && !id.equals(articleId)) {
             // A new article display request arrived!
+
+            if (displayTiming != null) {
+                // Tracking previous article display time
+                TrackingAnalyticsUtils.sendTiming(getActivity(),
+                        TrackingAnalyticsUtils.CAT_USER_TIMINGS,
+                        System.currentTimeMillis() - displayTiming,
+                        TrackingAnalyticsUtils.NAME_DISPLAY_TIMING,
+                        null);
+            }
+            displayTiming = System.currentTimeMillis();
             articleId = id;
+
+            // Tracking new article id
+            TrackingAnalyticsUtils.sendEvent(getActivity(),
+                    TrackingAnalyticsUtils.CAT_UI_ACTION,
+                    TrackingAnalyticsUtils.ACT_ARTICLE_SELECTED,
+                    articleId);
 
             // Create a new loader with new article parameter
             getLoaderManager().destroyLoader(LOADER_ARTICLE_ID);

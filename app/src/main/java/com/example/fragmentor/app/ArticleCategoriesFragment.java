@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.example.fragmentor.app.util.TrackingAnalyticsUtils;
 
 public class ArticleCategoriesFragment
         extends Fragment
@@ -23,6 +24,7 @@ public class ArticleCategoriesFragment
     };
 
     private Callbacks selectionCallback = sDummyCallbacks;
+    private ArrayAdapter<String> categoryAdapter;
 
     public interface Callbacks {
         public void onCategorySelected(int categoryIndex);
@@ -42,20 +44,27 @@ public class ArticleCategoriesFragment
         // Show the dummy content as text in a TextView.
         Spinner categoriesSpinner = (Spinner) rootView.findViewById(R.id.spinner);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(
+        categoryAdapter = new ArrayAdapter<String>(
                 getActivity(),
                 android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.agiNewsFeedsNames)
         );
 
-        dataAdapter.setDropDownViewResource
+        categoryAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
 
-        categoriesSpinner.setAdapter(dataAdapter);
+        categoriesSpinner.setAdapter(categoryAdapter);
 
         categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // Tracking category selected
+                TrackingAnalyticsUtils.sendEvent(getActivity(),
+                        TrackingAnalyticsUtils.CAT_UI_ACTION,
+                        TrackingAnalyticsUtils.ACT_CATEGORY_SELECTED,
+                        categoryAdapter.getItem(position));
+
                 selectionCallback.onCategorySelected(position);
             }
 

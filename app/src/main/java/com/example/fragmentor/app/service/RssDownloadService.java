@@ -9,6 +9,7 @@ import com.example.fragmentor.app.controller.AgiRssParser;
 import com.example.fragmentor.app.db.ArticlesDataSource;
 import com.example.fragmentor.app.db.FragMentorSQLiteHelper;
 import com.example.fragmentor.app.model.Article;
+import com.example.fragmentor.app.util.TrackingAnalyticsUtils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -50,6 +51,7 @@ public class RssDownloadService extends IntentService {
             List<Article> results = null;
             HttpGet httpGet = new HttpGet(agiNewsFeeds[category]);
             HttpResponse response;
+            long downloadTiming = System.currentTimeMillis();
 
             try {
                 response = httpclient.execute(httpGet);
@@ -64,6 +66,13 @@ public class RssDownloadService extends IntentService {
             }  catch (XmlPullParserException e) {
                 Log.e(TAG, e.getMessage());
             }
+
+            // Tengo traccia del tempo tra la richiesa di registrazione e l'SMS ricevuto
+            TrackingAnalyticsUtils.sendTiming(getApplicationContext(),
+                    TrackingAnalyticsUtils.CAT_SYSTEM_TIMINGS,
+                    System.currentTimeMillis() - downloadTiming,
+                    TrackingAnalyticsUtils.NAME_DOWNLOAD_TIMING,
+                    null);
 
             if (results != null) {
                 // Inserisco tutto!
