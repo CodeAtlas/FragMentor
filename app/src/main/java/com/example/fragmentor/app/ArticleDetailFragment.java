@@ -66,6 +66,7 @@ public class ArticleDetailFragment
             final Bundle args = getArguments();
             if (args != null && args.containsKey(ARG_ARTICLE_ID)) {
                 articleId = args.getString(ARG_ARTICLE_ID);
+                displayTiming = System.currentTimeMillis();
             }
         }
 
