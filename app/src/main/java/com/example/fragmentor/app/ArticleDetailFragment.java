@@ -79,8 +79,12 @@ public class ArticleDetailFragment
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putString(ARG_ARTICLE_ID, articleId);
-        outState.putLong(KEY_DISPLAY_TIMING, displayTiming);
+        if (articleId != null) {
+            outState.putString(ARG_ARTICLE_ID, articleId);
+        }
+        if (displayTiming != null) {
+            outState.putLong(KEY_DISPLAY_TIMING, displayTiming);
+        }
         super.onSaveInstanceState(outState);
     }
 

@@ -93,7 +93,10 @@ public class ArticleListAdapter implements ListAdapter {
 
     @Override
     public long getItemId(int position) {
-        return articles.get(position).hashCode();
+        if (position >= 0 && position < articles.size()) {
+            return articles.get(position).hashCode();
+        }
+        return 0l;
     }
 
     @Override

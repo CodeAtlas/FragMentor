@@ -34,7 +34,8 @@ public class ArticleListFragment
 {
 
     private ArticleListAdapter articleAdapter;
-    private int currentCategory = 0;
+    private int currentCategory;
+    private Integer currentSelection;
 
     /*  Id Loader */
     private static final int LOADER_ARTICLES_ID = 58845;
@@ -44,6 +45,8 @@ public class ArticleListFragment
      * activated item position. Only used on tablets.
      */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
+
+    private static final String STATE_CATEGORY = "category";
 
     /**
      * The fragment's current callback object, which is notified of list item
@@ -92,6 +95,12 @@ public class ArticleListFragment
         // Avviso che contribuisco a riempire le Action della ActionBar
         setHasOptionsMenu(true);
 
+        if (savedInstanceState == null) {
+            currentCategory = 0;
+        } else {
+            currentCategory = savedInstanceState.getInt(STATE_CATEGORY);
+        }
+
         articleAdapter = new ArticleListAdapter(getActivity());
         setListAdapter(articleAdapter);
 
@@ -125,7 +134,7 @@ public class ArticleListFragment
         // Restore the previously serialized activated item position.
         if (savedInstanceState != null
                 && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+            currentSelection = savedInstanceState.getInt(STATE_ACTIVATED_POSITION);
         }
     }
 
@@ -165,6 +174,7 @@ public class ArticleListFragment
         if (mActivatedPosition != ListView.INVALID_POSITION) {
             // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
+            outState.putInt(STATE_CATEGORY, currentCategory);
         }
     }
 
@@ -213,6 +223,11 @@ public class ArticleListFragment
             case LOADER_ARTICLES_ID:
                 articleAdapter.clear();
                 articleAdapter.addAll(data);
+
+                if (currentSelection != null) {
+                    setActivatedPosition(currentSelection);
+                    currentSelection = null;
+                }
                 break;
         }
     }
