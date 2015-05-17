@@ -11,10 +11,10 @@
         <item>http://www.agi.it/spettacolo/rss</item>
         <item>http://www.agi.it/sport/rss</item>
         <item>http://www.agi.it/salute/rss</item>
+        <item>http://www.agi.it/research-e-sviluppo/rss</item>
         <item>http://www.agi.it/tech/rss</item>
         <item>http://www.agi.it/cinema/rss</item>
         <item>http://www.agi.it/gossip/rss</item>
-        <item>http://www.agi.it/animali/rss</item>
     </string-array>
 
     <!-- L'ordine è importante, se lo cambi assicurati di svuotare il DB SQLite -->
@@ -26,10 +26,10 @@
         <item>AGI - Spettacolo</item>
         <item>AGI - Sport</item>
         <item>AGI - Salute</item>
+        <item>AGI - Ricerca e Sviluppo</item>
         <item>AGI - Tecnologia</item>
         <item>AGI - Cinema</item>
-        <item>AGI - Gossip</item>
-        <item>AGI - Animali</item>
+        <item>AGI - People</item>
     </string-array>
 
 </resources>
