@@ -22,7 +22,7 @@ import android.support.v7.app.AppCompatActivity;
  * {@link ArticleListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class ArticleMainActivity
+public class MainActivity
         extends AppCompatActivity
         implements ArticleListFragment.Callbacks, ArticleCategoriesFragment.Callbacks {
 

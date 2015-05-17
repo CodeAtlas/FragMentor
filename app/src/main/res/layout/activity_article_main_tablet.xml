@@ -7,7 +7,7 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:baselineAligned="false"
-    tools:context="com.example.fragmentor.app.ArticleMainActivity">
+    tools:context="com.example.fragmentor.app.MainActivity">
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            tools:context="com.example.fragmentor.app.ArticleMainActivity"
+            tools:context="com.example.fragmentor.app.MainActivity"
             tools:layout="@layout/fragment_article_categories" />
 
         <fragment

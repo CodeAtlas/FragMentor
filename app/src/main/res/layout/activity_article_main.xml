@@ -13,7 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_alignParentTop="true"
-        tools:context="com.example.fragmentor.app.ArticleMainActivity"
+        tools:context="com.example.fragmentor.app.MainActivity"
         tools:layout="@layout/fragment_article_categories" />
 
     <fragment
@@ -24,7 +24,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_below="@id/article_categories"
-        tools:context="com.example.fragmentor.app.ArticleMainActivity"
+        tools:context="com.example.fragmentor.app.MainActivity"
         tools:layout="@android:layout/list_content" />
 
 </RelativeLayout>

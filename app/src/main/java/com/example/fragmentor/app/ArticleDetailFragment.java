@@ -15,7 +15,7 @@ import com.example.fragmentor.app.util.TrackingAnalyticsUtils;
 
 /**
  * A fragment representing a single Article detail screen.
- * This fragment is either contained in a {@link ArticleMainActivity}
+ * This fragment is either contained in a {@link MainActivity}
  * in two-pane mode (on tablets) or a {@link ArticleDetailActivity}
  * on handsets.
  */
