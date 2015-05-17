@@ -35,7 +35,7 @@ public class MainActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_article_main);
+        setContentView(R.layout.activity_main);
 
         if (findViewById(R.id.article_detail_container) != null) {
             // The detail container view will be present only in the

@@ -1,5 +1,5 @@
 <resources>
 
-    <item type="layout" name="activity_article_main">@layout/activity_article_main_tablet</item>
+    <item type="layout" name="activity_article_main">@layout/activity_main_tablet</item>
 
 </resources>
