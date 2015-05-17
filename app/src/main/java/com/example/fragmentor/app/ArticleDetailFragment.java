@@ -21,8 +21,7 @@ import com.example.fragmentor.app.util.TrackingAnalyticsUtils;
  */
 public class ArticleDetailFragment
         extends Fragment
-        implements ArticleListFragment.Callbacks, LoaderManager.LoaderCallbacks<Article>
-{
+        implements ArticleListFragment.Callbacks, LoaderManager.LoaderCallbacks<Article> {
 
     /* The fragment argument representing the item ID that this fragment represents. */
     public static final String ARG_ARTICLE_ID = "item_id";
@@ -46,8 +45,7 @@ public class ArticleDetailFragment
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ArticleDetailFragment() {
-    }
+    public ArticleDetailFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

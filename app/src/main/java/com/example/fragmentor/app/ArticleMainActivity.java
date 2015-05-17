@@ -3,7 +3,7 @@ package com.example.fragmentor.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 
 
 /**
@@ -23,7 +23,7 @@ import android.support.v4.app.FragmentActivity;
  * to listen for item selections.
  */
 public class ArticleMainActivity
-        extends FragmentActivity
+        extends AppCompatActivity
         implements ArticleListFragment.Callbacks, ArticleCategoriesFragment.Callbacks {
 
     /**

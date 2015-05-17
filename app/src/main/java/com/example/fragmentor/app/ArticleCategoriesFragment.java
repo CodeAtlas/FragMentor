@@ -13,8 +13,7 @@ import android.widget.Spinner;
 import com.example.fragmentor.app.util.TrackingAnalyticsUtils;
 
 public class ArticleCategoriesFragment
-        extends Fragment
-{
+        extends Fragment {
 
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
@@ -27,11 +26,10 @@ public class ArticleCategoriesFragment
     private ArrayAdapter<String> categoryAdapter;
 
     public interface Callbacks {
-        public void onCategorySelected(int categoryIndex);
+        void onCategorySelected(int categoryIndex);
     }
 
-    public ArticleCategoriesFragment() {
-    }
+    public ArticleCategoriesFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

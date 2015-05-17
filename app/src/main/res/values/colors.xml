@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- For material colors see http://www.google.com/design/spec/style/color.html -->
+    <color name="material_green_500">#4CAF50</color>
+    <color name="material_green_700">#388E3C</color>
+    <color name="material_orange_A200">#FFAB40</color>
+</resources>

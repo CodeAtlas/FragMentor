@@ -30,8 +30,7 @@ import java.util.List;
  */
 public class ArticleListFragment
         extends ListFragment
-        implements LoaderManager.LoaderCallbacks<List<Article>>, ArticleCategoriesFragment.Callbacks
-{
+        implements LoaderManager.LoaderCallbacks<List<Article>>, ArticleCategoriesFragment.Callbacks {
 
     private ArticleListAdapter articleAdapter;
     private int currentCategory;
@@ -68,7 +67,7 @@ public class ArticleListFragment
         /**
          * Callback for when an item has been selected.
          */
-        public void onArticleSelected(String id);
+        void onArticleSelected(String id);
     }
 
     /**

@@ -31,7 +31,7 @@
             android:parentActivityName=".ArticleMainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fragmentor.app.ArticleListActivity" />
+                android:value=".ArticleMainActivity" />
         </activity>
 
         <service

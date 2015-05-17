@@ -10,8 +10,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.example.fragmentor.app.db.ArticlesDataSource;
 import com.example.fragmentor.app.model.Article;
 
-import java.util.List;
-
 public class ArticleLoader extends AsyncTaskLoader<Article> {
 
     private ArticlesDataSource dataSource;
