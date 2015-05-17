@@ -20,17 +20,17 @@ import java.util.Locale;
 
 public class ArticleListAdapter implements ListAdapter {
 
-    Context context;
+    LayoutInflater inflater;
     ArrayList<Article> articles = new ArrayList<Article>();
     ArrayList<DataSetObserver> observers = new ArrayList<DataSetObserver>();
     SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.ITALY);
 
     public ArticleListAdapter(@NonNull Context context) {
-        this.context = context;
+        this.inflater = LayoutInflater.from(context);
     }
 
     public ArticleListAdapter(@NonNull Context context, @NonNull Collection<Article> data) {
-        this.context = context;
+        this.inflater = LayoutInflater.from(context);
         this.articles.addAll(data);
     }
 
@@ -109,7 +109,7 @@ public class ArticleListAdapter implements ListAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.listitem_article, parent, false);
+            convertView = inflater.inflate(R.layout.listitem_article, parent, false);
             if (convertView == null) {
                 return null;
             }
