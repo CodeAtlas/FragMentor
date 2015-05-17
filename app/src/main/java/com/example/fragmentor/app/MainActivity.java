@@ -83,7 +83,7 @@ public class MainActivity
             // fragment transaction.
             Fragment f = getSupportFragmentManager().findFragmentById(R.id.article_detail_container);
 
-            if (f != null && f instanceof ArticleDetailFragment) {
+            if (f instanceof ArticleDetailFragment) {
                 ((ArticleDetailFragment) f).onArticleSelected(id);
             }
 
