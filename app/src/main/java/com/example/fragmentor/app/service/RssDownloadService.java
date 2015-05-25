@@ -67,7 +67,7 @@ public class RssDownloadService extends IntentService {
                 Log.e(TAG, e.getMessage());
             }
 
-            // Tengo traccia del tempo tra la richiesa di registrazione e l'SMS ricevuto
+            // Tracking RSS download time
             TrackingAnalyticsUtils.sendTiming(getApplicationContext(),
                     TrackingAnalyticsUtils.CAT_SYSTEM_TIMINGS,
                     System.currentTimeMillis() - downloadTiming,
