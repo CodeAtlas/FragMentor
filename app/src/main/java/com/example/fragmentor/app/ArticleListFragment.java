@@ -162,7 +162,7 @@ public class ArticleListFragment
     public void onListItemClick(ListView listView, View view, int position, long id) {
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onArticleSelected(((Article) articleAdapter.getItem(position)).id);
+        mCallbacks.onArticleSelected(((Article) articleAdapter.getItem(position)).id.get());
     }
 
     @Override

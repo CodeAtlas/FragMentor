@@ -6,7 +6,7 @@ import android.webkit.WebView;
 
 public class Bindings {
 
-    @BindingAdapter("bind:htmlContent")
+    @BindingAdapter("htmlContent")
     public static void setHtmlContent(WebView webView, String html){
         webView.loadData(html, "text/html", "UTF-8");
     }

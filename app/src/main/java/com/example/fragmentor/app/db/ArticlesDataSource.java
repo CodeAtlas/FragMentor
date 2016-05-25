@@ -101,7 +101,7 @@ public class ArticlesDataSource {
         int result = mDatabase.delete(
                 FragMentorSQLiteHelper.ARTICLES_TABLE_NAME,
                 FragMentorSQLiteHelper.ARTICLES_COLUMN_ID + " = ?",
-                new String[] {entity.id}
+                new String[] {entity.id.get()}
         );
 
         if (result != 0) {
@@ -137,7 +137,7 @@ public class ArticlesDataSource {
                 FragMentorSQLiteHelper.ARTICLES_TABLE_NAME,
                 generateContentValuesFromObject(entity),
                 FragMentorSQLiteHelper.ARTICLES_COLUMN_ID + " = ?",
-                new String[] {entity.id}
+                new String[] {entity.id.get()}
         );
 
         if (result != 0) {
@@ -239,12 +239,12 @@ public class ArticlesDataSource {
 
     public ContentValues generateContentValuesFromObject(@NonNull Article entity) {
         ContentValues values = new ContentValues();
-        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_CATEGORY, entity.category);
-        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_ID, entity.id);
-        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_TITLE, entity.title);
-        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_CONTENT, entity.content);
-        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_LINK, entity.link);
-        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_DATE, entity.date.getTime());
+        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_CATEGORY, entity.category.get());
+        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_ID, entity.id.get());
+        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_TITLE, entity.title.get());
+        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_CONTENT, entity.content.get());
+        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_LINK, entity.link.get());
+        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_DATE, entity.date.get().getTime());
         return values;
     }
 }
