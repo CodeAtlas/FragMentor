@@ -11,15 +11,11 @@ import com.example.fragmentor.app.db.FragMentorSQLiteHelper;
 import com.example.fragmentor.app.model.Article;
 import com.example.fragmentor.app.util.TrackingAnalyticsUtils;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 public class RssDownloadService extends IntentService {
@@ -35,7 +31,6 @@ public class RssDownloadService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String[] agiNewsFeeds = getResources().getStringArray(R.array.agiNewsFeedsUrls);
 
-        HttpClient httpclient = new DefaultHttpClient();
         AgiRssParser parser = new AgiRssParser();
         ArticlesDataSource dataSource = new ArticlesDataSource(getApplicationContext());
 
@@ -47,23 +42,13 @@ public class RssDownloadService extends IntentService {
 
         // Cerco gli articoli nuovi
         for (int category = 0; category < agiNewsFeeds.length; category++) {
-
             List<Article> results = null;
-            HttpGet httpGet = new HttpGet(agiNewsFeeds[category]);
-            HttpResponse response;
             long downloadTiming = System.currentTimeMillis();
 
             try {
-                response = httpclient.execute(httpGet);
-                HttpEntity entity = response.getEntity();
-
-                if (entity != null) {
-                    InputStream is = entity.getContent();
-                    results = parser.parse(category, is);
-                }
-            } catch (IOException e) {
-                Log.e(TAG, e.getMessage());
-            }  catch (XmlPullParserException e) {
+                InputStream is = new URL(agiNewsFeeds[category]).openStream();
+                results = parser.parse(category, is);
+            } catch (IOException | XmlPullParserException e) {
                 Log.e(TAG, e.getMessage());
             }
 
