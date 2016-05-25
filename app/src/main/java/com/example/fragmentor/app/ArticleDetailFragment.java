@@ -1,15 +1,16 @@
 package com.example.fragmentor.app;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 
 import com.example.fragmentor.app.controller.ArticleLoader;
+import com.example.fragmentor.app.databinding.ArticleDetailFragmentBinding;
 import com.example.fragmentor.app.model.Article;
 import com.example.fragmentor.app.util.TrackingAnalyticsUtils;
 
@@ -35,11 +36,11 @@ public class ArticleDetailFragment
     /* ID for the article loader in the LoaderManager */
     private static final int LOADER_ARTICLE_ID = 42;
 
-    /* The article content will be displayed here */
-    private WebView detailWebView;
-
     /* User article display timing */
     private Long displayTiming;
+
+    /* The article content will be displayed here */
+    private ArticleDetailFragmentBinding binding;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -67,12 +68,6 @@ public class ArticleDetailFragment
                 displayTiming = System.currentTimeMillis();
             }
         }
-
-        if (articleId != null) {
-            // The call to forceLoad() is not necessary BUT it's useful to avoid a tricky bug of
-            // AsyncTaskLoader (compat library) that doesn't call loadInBackgroud() when started
-            getLoaderManager().initLoader(LOADER_ARTICLE_ID, null, this).forceLoad();
-        }
     }
 
     @Override
@@ -84,6 +79,24 @@ public class ArticleDetailFragment
             outState.putLong(KEY_DISPLAY_TIMING, displayTiming);
         }
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = ArticleDetailFragmentBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (articleId != null) {
+            // The call to forceLoad() is not necessary BUT it's useful to avoid a tricky bug of
+            // AsyncTaskLoader (compat library) that doesn't call loadInBackgroud() when started
+            getLoaderManager().initLoader(LOADER_ARTICLE_ID, null, this).forceLoad();
+        }
     }
 
     @Override
@@ -115,20 +128,6 @@ public class ArticleDetailFragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
-        if (rootView == null) {
-            return null;
-        }
-
-        // Show the article content as text in a TextView.
-        detailWebView = ((WebView) rootView.findViewById(R.id.article_detail));
-
-        return rootView;
-    }
-
-    @Override
     public Loader<Article> onCreateLoader(int id, Bundle args) {
         switch (id) {
             case LOADER_ARTICLE_ID:
@@ -142,9 +141,7 @@ public class ArticleDetailFragment
     public void onLoadFinished(Loader<Article> loader, Article data) {
         switch (loader.getId()) {
             case LOADER_ARTICLE_ID:
-                if (detailWebView != null) {
-                    detailWebView.loadData(data.description, "text/html", "UTF-8");
-                }
+                binding.setArticle(data);
                 break;
         }
     }
