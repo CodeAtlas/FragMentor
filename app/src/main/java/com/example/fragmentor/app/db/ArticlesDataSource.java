@@ -26,7 +26,7 @@ public class ArticlesDataSource {
             FragMentorSQLiteHelper.ARTICLES_COLUMN_CATEGORY,
             FragMentorSQLiteHelper.ARTICLES_COLUMN_ID,
             FragMentorSQLiteHelper.ARTICLES_COLUMN_TITLE,
-            FragMentorSQLiteHelper.ARTICLES_COLUMN_DESCRIPTION,
+            FragMentorSQLiteHelper.ARTICLES_COLUMN_CONTENT,
             FragMentorSQLiteHelper.ARTICLES_COLUMN_LINK,
             FragMentorSQLiteHelper.ARTICLES_COLUMN_DATE
     };
@@ -231,7 +231,7 @@ public class ArticlesDataSource {
                 cursor.getInt(cursor.getColumnIndex(FragMentorSQLiteHelper.ARTICLES_COLUMN_CATEGORY)),
                 cursor.getString(cursor.getColumnIndex(FragMentorSQLiteHelper.ARTICLES_COLUMN_ID)),
                 cursor.getString(cursor.getColumnIndex(FragMentorSQLiteHelper.ARTICLES_COLUMN_TITLE)),
-                cursor.getString(cursor.getColumnIndex(FragMentorSQLiteHelper.ARTICLES_COLUMN_DESCRIPTION)),
+                cursor.getString(cursor.getColumnIndex(FragMentorSQLiteHelper.ARTICLES_COLUMN_CONTENT)),
                 cursor.getString(cursor.getColumnIndex(FragMentorSQLiteHelper.ARTICLES_COLUMN_LINK)),
                 new Date(cursor.getLong(cursor.getColumnIndex(FragMentorSQLiteHelper.ARTICLES_COLUMN_DATE)))
         );
@@ -242,7 +242,7 @@ public class ArticlesDataSource {
         values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_CATEGORY, entity.category);
         values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_ID, entity.id);
         values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_TITLE, entity.title);
-        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_DESCRIPTION, entity.description);
+        values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_CONTENT, entity.content);
         values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_LINK, entity.link);
         values.put(FragMentorSQLiteHelper.ARTICLES_COLUMN_DATE, entity.date.getTime());
         return values;

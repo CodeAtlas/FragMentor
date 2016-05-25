@@ -73,7 +73,7 @@ public class AgiRssParser {
         parser.require(XmlPullParser.START_TAG, ns, "item");
         String id = null;
         String title = null;
-        String description = null;
+        String content = null;
         String link = null;
         Date date = null;
         while (parser.next() != XmlPullParser.END_TAG) {
@@ -85,8 +85,8 @@ public class AgiRssParser {
                 id = readId(parser);
             } else if (name.equals("title")) {
                 title = readTitle(parser);
-            } else if (name.equals("description")) {
-                description = readDescription(parser);
+            } else if (name.equals("content:encoded")) {
+                content = readContent(parser);
             } else if (name.equals("link")) {
                 link = readLink(parser);
             } else if (name.equals("pubDate")) {
@@ -95,7 +95,7 @@ public class AgiRssParser {
                 skip(parser);
             }
         }
-        return new Article(category, id, title, description, link, date);
+        return new Article(category, id, title, content, link, date);
     }
 
     private String readId(XmlPullParser parser) throws IOException, XmlPullParserException {
@@ -112,11 +112,11 @@ public class AgiRssParser {
         return title;
     }
 
-    private String readDescription(XmlPullParser parser) throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, ns, "description");
-        String description = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "description");
-        return description;
+    private String readContent(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "content:encoded");
+        String content = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "content:encoded");
+        return content;
     }
 
     private String readLink(XmlPullParser parser) throws IOException, XmlPullParserException {

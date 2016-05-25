@@ -8,13 +8,10 @@
         <item>http://www.agi.it/economia/rss</item>
         <item>http://www.agi.it/politica/rss</item>
         <item>http://www.agi.it/estero/rss</item>
-        <item>http://www.agi.it/spettacolo/rss</item>
+        <item>http://www.agi.it/cultura/rss</item>
         <item>http://www.agi.it/sport/rss</item>
-        <item>http://www.agi.it/salute/rss</item>
-        <item>http://www.agi.it/research-e-sviluppo/rss</item>
-        <item>http://www.agi.it/tech/rss</item>
-        <item>http://www.agi.it/cinema/rss</item>
-        <item>http://www.agi.it/gossip/rss</item>
+        <item>http://www.agi.it/innovazione/rss</item>
+        <item>http://www.agi.it/lifestyle/rss</item>
     </string-array>
 
     <!-- L'ordine è importante, se lo cambi assicurati di svuotare il DB SQLite -->
@@ -23,13 +20,10 @@
         <item>AGI - Economia</item>
         <item>AGI - Politica</item>
         <item>AGI - Estero</item>
-        <item>AGI - Spettacolo</item>
+        <item>AGI - Cultura</item>
         <item>AGI - Sport</item>
-        <item>AGI - Salute</item>
-        <item>AGI - Ricerca e Sviluppo</item>
-        <item>AGI - Tecnologia</item>
-        <item>AGI - Cinema</item>
-        <item>AGI - People</item>
+        <item>AGI - Innovazione</item>
+        <item>AGI - Lifestyle</item>
     </string-array>
 
 </resources>

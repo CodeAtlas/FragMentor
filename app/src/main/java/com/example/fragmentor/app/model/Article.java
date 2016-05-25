@@ -8,7 +8,7 @@ public class Article {
     public final int category;
     public final String id;
     public final String title;
-    public final String description;
+    public final String content;
     public final String link;
     public final Date date;
 
@@ -16,14 +16,14 @@ public class Article {
             int category,
             @NonNull String id,
             String title,
-            String description,
+            String content,
             String link,
             Date date
     ) {
         this.category = category;
         this.id = id;
         this.title = title;
-        this.description = description;
+        this.content = content;
         this.link = link;
         this.date = date;
     }
