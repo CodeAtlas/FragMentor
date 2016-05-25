@@ -5,6 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
+        applicationId "com.example.fragmentor.app"
         minSdkVersion 11
         targetSdkVersion 23
         versionCode 3
