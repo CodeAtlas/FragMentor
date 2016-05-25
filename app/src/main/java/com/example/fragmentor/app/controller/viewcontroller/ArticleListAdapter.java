@@ -7,23 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
-import android.widget.TextView;
 
-import com.example.fragmentor.app.R;
+import com.example.fragmentor.app.databinding.ArticleListItemBinding;
 import com.example.fragmentor.app.model.Article;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Locale;
 
 
 public class ArticleListAdapter implements ListAdapter {
 
     LayoutInflater inflater;
-    ArrayList<Article> articles = new ArrayList<Article>();
-    ArrayList<DataSetObserver> observers = new ArrayList<DataSetObserver>();
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.ITALY);
+    ArrayList<Article> articles = new ArrayList<>();
+    ArrayList<DataSetObserver> observers = new ArrayList<>();
 
     public ArticleListAdapter(@NonNull Context context) {
         this.inflater = LayoutInflater.from(context);
@@ -34,13 +30,11 @@ public class ArticleListAdapter implements ListAdapter {
         this.articles.addAll(data);
     }
 
-    private class ViewHolder {
-        public TextView text1;
-        public TextView text2;
+    private static class ArticleViewHolder {
+        public ArticleListItemBinding binding;
 
-        private ViewHolder(@NonNull View rootView) {
-            text1 = (TextView) rootView.findViewById(android.R.id.text1);
-            text2 = (TextView) rootView.findViewById(android.R.id.text2);
+        private ArticleViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
+            binding = ArticleListItemBinding.inflate(inflater, viewGroup, false);
         }
     }
 
@@ -96,7 +90,7 @@ public class ArticleListAdapter implements ListAdapter {
         if (position >= 0 && position < articles.size()) {
             return articles.get(position).hashCode();
         }
-        return 0l;
+        return 0L;
     }
 
     @Override
@@ -106,21 +100,17 @@ public class ArticleListAdapter implements ListAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        ArticleViewHolder holder;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.listitem_article, parent, false);
-            if (convertView == null) {
-                return null;
-            }
-            holder = new ViewHolder(convertView);
+            holder = new ArticleViewHolder(inflater, parent);
+            convertView = holder.binding.getRoot();
             convertView.setTag(holder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (ArticleViewHolder) convertView.getTag();
         }
 
-        holder.text1.setText(articles.get(position).title);
-        holder.text2.setText(dateFormatter.format(articles.get(position).date));
+        holder.binding.setArticle(articles.get(position));
 
         return convertView;
     }
