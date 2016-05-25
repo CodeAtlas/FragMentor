@@ -1,6 +1,7 @@
 package com.example.fragmentor.app;
 
-import android.app.Activity;
+import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
+import com.example.fragmentor.app.databinding.ArticleCategoriesFragmentBinding;
 import com.example.fragmentor.app.util.TrackingAnalyticsUtils;
 
 public class ArticleCategoriesFragment
@@ -34,15 +35,10 @@ public class ArticleCategoriesFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_article_categories, container, false);
-        if (rootView == null) {
-            return null;
-        }
+        ArticleCategoriesFragmentBinding binding =
+                DataBindingUtil.inflate(inflater, R.layout.fragment_article_categories, container, false);
 
-        // Show the dummy content as text in a TextView.
-        Spinner categoriesSpinner = (Spinner) rootView.findViewById(R.id.spinner);
-
-        categoryAdapter = new ArrayAdapter<String>(
+        categoryAdapter = new ArrayAdapter<>(
                 getActivity(),
                 android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.agiNewsFeedsNames)
@@ -51,9 +47,9 @@ public class ArticleCategoriesFragment
         categoryAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
 
-        categoriesSpinner.setAdapter(categoryAdapter);
+        binding.spinner.setAdapter(categoryAdapter);
 
-        categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -72,14 +68,14 @@ public class ArticleCategoriesFragment
             }
         });
 
-        return rootView;
+        return binding.getRoot();
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (activity instanceof Callbacks) {
-            selectionCallback = (Callbacks) activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof Callbacks) {
+            selectionCallback = (Callbacks) context;
         }
     }
 
